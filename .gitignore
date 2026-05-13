@@ -1,0 +1,13 @@
+.venv/
+.venv311/
+__pycache__/
+*.pyc
+*.log
+
+# Data files
+*.csv
+
+# Large training artifacts
+models/*.npz
+models/*.keras
+models/*.joblib

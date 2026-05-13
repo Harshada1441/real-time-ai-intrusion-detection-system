@@ -1,0 +1,12 @@
+{
+  "test_accuracy": 0.943123459815979,
+  "test_loss": 0.14845484495162964,
+  "epochs": 7,
+  "class_names": [
+    "BENIGN",
+    "DOS",
+    "Probe",
+    "R2L",
+    "U2R"
+  ]
+}

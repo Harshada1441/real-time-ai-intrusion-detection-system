@@ -1,0 +1,41 @@
+{
+  "profile": "auto",
+  "include_benign": true,
+  "feature_columns": [
+    "dst_port",
+    "flow_duration",
+    "total_fwd_packets",
+    "total_backward_packets",
+    "total_length_fwd_packets",
+    "total_length_bwd_packets",
+    "fwd_packet_length_max",
+    "fwd_packet_length_min",
+    "fwd_packet_length_mean",
+    "fwd_packet_length_std",
+    "bwd_packet_length_max",
+    "bwd_packet_length_min",
+    "bwd_packet_length_mean",
+    "bwd_packet_length_std",
+    "flow_bytes_per_s",
+    "flow_packets_per_s",
+    "packet_length_mean",
+    "packet_length_std",
+    "fwd_iat_mean",
+    "bwd_iat_mean",
+    "protocol"
+  ],
+  "class_names": [
+    "BENIGN",
+    "DOS",
+    "Probe",
+    "R2L",
+    "U2R"
+  ],
+  "created_at": "2026-05-13T22:40:17.338078Z",
+  "num_features": 21,
+  "num_classes": 5,
+  "test_accuracy": 0.943123459815979,
+  "test_loss": 0.14845484495162964,
+  "model_path": "ids_model.keras",
+  "trained_at": "2026-05-13T22:40:17.318734Z"
+}
