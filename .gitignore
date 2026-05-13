@@ -1,13 +1,18 @@
+# Environments
 .venv/
 .venv311/
-__pycache__/
-*.pyc
-*.log
 
-# Data files
+# Datasets (Excluded due to GitHub limits)
 *.csv
+*.pcap
+*.pcapng
 
-# Large training artifacts
-models/*.npz
+# Saved Models (Excluded if too large)
 models/*.keras
+models/*.npz
 models/*.joblib
+
+# OS
+.DS_Store
+Thumbs.db
+__pycache__/

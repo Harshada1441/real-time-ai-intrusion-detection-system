@@ -1,24 +1,15 @@
 # Real-Time AI Intrusion Detection System (RT-AI IDS)
 
-Production-grade pipeline for training on benchmark IDS datasets and detecting live intrusions with a real-time dashboard.
+Production-grade pipeline for **training on benchmark IDS datasets** and **detecting live intrusions in real time** with a Streamlit dashboard.
 
-## Why this project matters
-Modern networks face fast, noisy attacks that change faster than static rules. This project demonstrates how data science and real-time engineering can be combined to build a deployable IDS that learns from historic traffic and scores live flows with low latency.
+## Why this project
+Network attacks are fast, noisy, and increasingly automated. Traditional IDS rules can’t keep up with evolving patterns. This project combines **data science** (feature engineering, class imbalance handling, evaluation) with **real-time engineering** (packet capture + low-latency inference) to deliver an end‑to‑end, deployable IDS.
 
-## Highlights
-- End-to-end ML pipeline: data ingestion, label mapping, feature engineering, scaling, and training.
-- Imbalance handling with SMOTE (when available) for better minority-class learning.
-- Real-time flow feature extraction from live packets.
-- Streamlit dashboard for threat visibility and alert tracking.
-
-## Tech stack
-Python, Scapy, TensorFlow, Streamlit, Pandas, Scikit-Learn, Imbalanced-Learn
-
-## Datasets
-- CICIDS2017
-- NSL-KDD
-
-The preprocessor auto-detects CICIDS2017 CSVs and can switch to NSL-KDD explicitly.
+## What it does
+- Preprocesses CICIDS2017 / NSL‑KDD datasets into a unified, ML‑ready schema.
+- Trains a 4‑class deep learning classifier (DOS, Probe, R2L, U2R) with optional BENIGN.
+- Captures live packets with Scapy, extracts flow features, and runs inference.
+- Visualizes alerts and trends in a Streamlit dashboard.
 
 ## Architecture
 ```mermaid
@@ -32,60 +23,75 @@ flowchart LR
     G --> H[Streamlit Dashboard]
 ```
 
-## Model
-- Dense MLP: 128 -> 64 -> 32
-- BatchNorm + Dropout
-- Softmax output for multi-class classification
-- Class weighting + early stopping + LR reduction
+## Data and Labeling
+- **Datasets**: CICIDS2017 and NSL‑KDD.
+- **Label mapping**:
+  - DOS, Probe, R2L, U2R (attacks)
+  - Optional BENIGN / normal traffic
+- **Imbalance handling**: SMOTE when available.
 
-## Local results (example)
-See models/training_metrics.json for current metrics.
+## Feature Engineering
+- 21 flow‑based features aligned with CICIDS2017 (durations, packet sizes, IAT stats, rates).
+- Standardized using `StandardScaler`.
+
+## Model
+- Dense MLP: **128 → 64 → 32** with BatchNorm + Dropout
+- Softmax output for multi‑class prediction
+- Class weighting + early stopping + LR reduction for stability
+
+## Results (local run)
+From `models/training_metrics.json`:
+- **Test accuracy**: 0.9431  
+- **Test loss**: 0.1485  
+- **Epochs**: 7  
+- **Classes**: BENIGN, DOS, Probe, R2L, U2R
+
+## Repo map
+- `setup.py` — create folders
+- `requirements.txt` — dependencies
+- `src/preprocessor.py` — data loading, scaling, SMOTE, label mapping
+- `src/train.py` — model training and artifact saving
+- `src/sniffer.py` — live packet capture + feature extraction + inference
+- `ui/app.py` — Streamlit dashboard
+- `models/training_metrics.json` — training summary
 
 ## How to run
-### 1) Create a virtual environment
+**Prereqs**
+- Python 3.11 recommended
+- On Windows, install **Npcap** to enable live packet capture
+
+**Setup**
 ```bash
 python -m venv .venv
 # Windows
 .venv\Scripts\activate
 # macOS/Linux
 source .venv/bin/activate
-```
 
-### 2) Install dependencies
-```bash
 pip install -r requirements.txt
 ```
 
-### 3) Preprocess data
+**Preprocess**
 ```bash
 python src/preprocessor.py --data-dir . --profile auto --include-benign --output-dir models
 ```
 
-### 4) Train model
+**Train**
 ```bash
 python src/train.py --data-dir . --profile auto --include-benign --model-dir models
 ```
 
-### 5) Run dashboard
+**Run dashboard**
 ```bash
 streamlit run ui/app.py
 ```
+
 Open http://localhost:8501
 
-## Live capture note (Windows)
-Install Npcap to enable Scapy packet capture. Without it, live sniffing is disabled.
-
-## Project structure
-- setup.py: creates /src, /models, /ui
-- src/preprocessor.py: data loading, SMOTE, scaling, label mapping
-- src/train.py: model training and artifact saving
-- src/sniffer.py: packet capture, flow features, inference
-- ui/app.py: Streamlit dashboard
-
 ## Responsible use
-This project is for defensive research, monitoring, and education. Use only on networks you own or have permission to test.
+This project is for defensive research, monitoring, and educational use. Do not use it to target systems without explicit authorization.
 
 ## Roadmap
 - Drift monitoring and recalibration
-- Containerized deployment
-- Expanded dataset support
+- Feature alignment for additional datasets
+- Containerized deployment + CI/CD
