@@ -1,18 +1,25 @@
 # Environments
 .venv/
 .venv311/
+venv/
 
-# Datasets (Excluded due to GitHub limits)
+# Python Cache
+__pycache__/
+*.pyc
+
+# Datasets
 *.csv
 *.pcap
 *.pcapng
 
-# Saved Models (Excluded if too large)
+# Models
 models/*.keras
 models/*.npz
 models/*.joblib
 
-# OS
+# Streamlit
+.streamlit/
+
+# OS Files
 .DS_Store
 Thumbs.db
-__pycache__/

@@ -1,6 +1,8 @@
 # Real-Time AI Intrusion Detection System (RT-AI IDS)
 
-Production-grade pipeline for **training on benchmark IDS datasets** and **detecting live intrusions in real time** with a Streamlit dashboard.
+Real‑time AI Intrusion Detection System — preprocessing, training, and live flow inference with a deployable Streamlit dashboard.
+
+Tagline: Real‑time ML‑driven network intrusion detection for research and SOC prototyping.
 
 ## Why this project
 Network attacks are fast, noisy, and increasingly automated. Traditional IDS rules can’t keep up with evolving patterns. This project combines **data science** (feature engineering, class imbalance handling, evaluation) with **real-time engineering** (packet capture + low-latency inference) to deliver an end‑to‑end, deployable IDS.
