@@ -1,8 +1,14 @@
-# Real-Time AI Intrusion Detection System (RT-AI IDS)
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)
+![Streamlit](https://img.shields.io/badge/Streamlit-Live-red)
+![Cybersecurity](https://img.shields.io/badge/Cybersecurity-AI%20IDS-green)
 
-Real‑time AI Intrusion Detection System — preprocessing, training, and live flow inference with a deployable Streamlit dashboard.
+# 🚀 Real-Time AI Intrusion Detection System (RT-AI IDS)
 
-Tagline: Real‑time ML‑driven network intrusion detection for research and SOC prototyping.
+### AI-Powered Cybersecurity Solution for Real-Time Network Threat Detection
+
+A machine learning and deep learning based Intrusion Detection System (IDS) that monitors live network traffic, extracts flow-based features, and classifies cyber attacks in real time using TensorFlow and Scapy. The system provides an interactive Streamlit dashboard for monitoring network activities and security alerts.
+
 
 ## Why this project
 Network attacks are fast, noisy, and increasingly automated. Traditional IDS rules can’t keep up with evolving patterns. This project combines **data science** (feature engineering, class imbalance handling, evaluation) with **real-time engineering** (packet capture + low-latency inference) to deliver an end‑to‑end, deployable IDS.
@@ -12,6 +18,72 @@ Network attacks are fast, noisy, and increasingly automated. Traditional IDS rul
 - Trains a 4‑class deep learning classifier (DOS, Probe, R2L, U2R) with optional BENIGN.
 - Captures live packets with Scapy, extracts flow features, and runs inference.
 - Visualizes alerts and trends in a Streamlit dashboard.
+  
+## 🔥 Key Features
+
+* Real-time network packet capture and analysis
+* AI-powered multi-class attack detection
+* Deep Learning model built with TensorFlow
+* Live monitoring dashboard using Streamlit
+* CICIDS2017 and NSL-KDD dataset support
+* Automated feature engineering and preprocessing
+* Class imbalance handling using SMOTE
+* Flow-based traffic analysis
+* Attack trend visualization and alert generation
+
+---
+
+## 🛠️ Tech Stack
+
+### Programming Languages
+
+* Python
+
+### Machine Learning & Deep Learning
+
+* TensorFlow
+* Scikit-Learn
+* NumPy
+* Pandas
+* Imbalanced-Learn (SMOTE)
+
+### Cybersecurity & Networking
+
+* Scapy
+* Npcap
+
+### Visualization & Dashboard
+
+* Streamlit
+
+### Model Persistence
+
+* Joblib
+
+---
+
+## 📊 Model Performance
+
+| Metric          | Value                        |
+| --------------- | ---------------------------- |
+| Test Accuracy   | 94.31%                       |
+| Test Loss       | 0.1485                       |
+| Classes         | BENIGN, DOS, Probe, R2L, U2R |
+| Training Epochs | 7                            |
+
+---
+
+## 🎯 Use Cases
+
+* Security Operations Center (SOC) Prototyping
+* Network Traffic Monitoring
+* Intrusion Detection Research
+* Cybersecurity Education
+* AI-Based Threat Detection
+* Machine Learning Security Projects
+
+---
+
 
 ## Architecture
 ```mermaid
@@ -25,75 +97,57 @@ flowchart LR
     G --> H[Streamlit Dashboard]
 ```
 
-## Data and Labeling
-- **Datasets**: CICIDS2017 and NSL‑KDD.
-- **Label mapping**:
-  - DOS, Probe, R2L, U2R (attacks)
-  - Optional BENIGN / normal traffic
-- **Imbalance handling**: SMOTE when available.
+## 👨‍💻 Developed By
 
-## Feature Engineering
-- 21 flow‑based features aligned with CICIDS2017 (durations, packet sizes, IAT stats, rates).
-- Standardized using `StandardScaler`.
+**Harshada Patil**
 
-## Model
-- Dense MLP: **128 → 64 → 32** with BatchNorm + Dropout
-- Softmax output for multi‑class prediction
-- Class weighting + early stopping + LR reduction for stability
+Computer Engineering Graduate | Aspiring Data Scientist | AI & Cybersecurity Enthusiast
 
-## Results (local run)
-From `models/training_metrics.json`:
-- **Test accuracy**: 0.9431  
-- **Test loss**: 0.1485  
-- **Epochs**: 7  
-- **Classes**: BENIGN, DOS, Probe, R2L, U2R
+---
 
-## Repo map
-- `setup.py` — create folders
-- `requirements.txt` — dependencies
-- `src/preprocessor.py` — data loading, scaling, SMOTE, label mapping
-- `src/train.py` — model training and artifact saving
-- `src/sniffer.py` — live packet capture + feature extraction + inference
-- `ui/app.py` — Streamlit dashboard
-- `models/training_metrics.json` — training summary
 
-## How to run
-**Prereqs**
-- Python 3.11 recommended
-- On Windows, install **Npcap** to enable live packet capture
 
-**Setup**
-```bash
-python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# macOS/Linux
-source .venv/bin/activate
 
-pip install -r requirements.txt
-```
 
-**Preprocess**
-```bash
-python src/preprocessor.py --data-dir . --profile auto --include-benign --output-dir models
-```
 
-**Train**
-```bash
-python src/train.py --data-dir . --profile auto --include-benign --model-dir models
-```
 
-**Run dashboard**
-```bash
-streamlit run ui/app.py
-```
 
-Open http://localhost:8501
 
-## Responsible use
-This project is for defensive research, monitoring, and educational use. Do not use it to target systems without explicit authorization.
 
-## Roadmap
-- Drift monitoring and recalibration
-- Feature alignment for additional datasets
-- Containerized deployment + CI/CD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
